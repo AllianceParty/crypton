@@ -247,7 +247,9 @@ const appData = {
             <div class="about-grid">
                 <div class="about-card">
                     <h3><i class="fa-solid fa-rocket"></i> Why Crypton?</h3>
-                    <p>Crypton is an advanced ecosystem designed to generate employable skills, foster innovation, and encourage students to solve problems that matter[cite: 1].</p>
+                    <p>Crypton is a special coding event built to help students learn skills that matter in the real world. Instead of being just for fun, it teaches participants how to solve problems that businesses and communities actually face. The event has three parts: Impact & Innovation, where students design tools like smart subscriptions or apps that give instant feedback; Game & Growth, where they create fun games that people enjoy and companies can earn money from; and Cyber Circuit, where they build new ways to protect data and stop hackers. Each challenge is practical, creative, and can be turned into something useful outside the classroom.
+
+The goal of Crypton is to prepare students for the future by giving them portfolio-ready projects that show creativity, coding ability, and problem-solving skills. Students can use any resource they want — like apps, libraries, or online tools — but they must prove they can apply them to real-world problems. This makes Crypton different from normal competitions, which are often just for entertainment. Here, every project has the chance to grow into something that helps businesses, communities, or even industries. In short, Crypton is a launchpad for the next generation of builders, gamers, and digital defenders.</p>
                 </div>
             </div>
         `
@@ -259,15 +261,15 @@ const appData = {
             <div class="domains-grid">
                 <div class="domain-card">
                     <h3><i class="fa-solid fa-bolt"></i> DOMAIN 1 - Impact & Innovation</h3>
-                    <p>Theme: Solve real-world challenges with high-impact scalable solutions[cite: 1].</p>
+                    <p>In Domain 1: Impact & Innovation, solving real-world problems with high-impact scalable solutions means creating technology that directly improves everyday life and can grow to help larger groups or businesses. The focus is not on small classroom projects but on building tools that people would actually use — solutions that make work easier, save time, or open new opportunities. By tackling challenges that matter to communities and industries, students learn how coding can move beyond theory into practical applications that generate real value and lasting impact.</p>
                 </div>
                 <div class="domain-card">
                     <h3><i class="fa-solid fa-gamepad"></i> DOMAIN 2 - Game & Growth</h3>
-                    <p>Theme: Build engaging next-gen interactive applications[cite: 1].</p>
+                    <p>In Domain 2: Game & Growth, the theme “Build engaging next‑gen interactive applications” highlights the importance of creating digital experiences that go beyond simple entertainment and instead capture attention through creativity, interactivity, and long‑term engagement. As described in the document, this domain is about designing modern games and applications that feel fresh, addictive, and sustainable — projects that can adapt to changing user needs, encourage collaboration, and even support monetization. By focusing on interactive design and scalable mechanics, students learn how coding can merge with storytelling, psychology, and economics to produce applications that resonate with today’s audiences and remain impactful in the future.</p>
                 </div>
                 <div class="domain-card">
                     <h3><i class="fa-solid fa-shield-halved"></i> DOMAIN 3 – Cyber Circuit</h3>
-                    <p>Theme: Develop robust security architectures and protocols.</p>
+                    <p>In Domain 3: Cyber Circuit, the theme “Develop robust security architectures and protocols” emphasizes building strong systems that protect users and organizations from digital threats. As described in the document, this domain is about going beyond basic tools to design innovative approaches that ensure trust, safety, and resilience in technology. Students are encouraged to think like guardians of the digital world, creating solutions that can withstand attacks, adapt to new risks, and safeguard sensitive information. By focusing on robust architectures and protocols, participants learn how cybersecurity is not just about defense but about building reliable foundations for the future of technology.</p>
                 </div>
             </div>
         `
@@ -278,12 +280,12 @@ const appData = {
         content: `
             <div class="domains-grid">
                 <div class="about-card">
-                    <h3><i class="fa-solid fa-hourglass-start"></i> Phase 1: Registration & Ideation</h3>
-                    <p>Submit team portfolios and select project domains.</p>
+                    <h3><i class="fa-solid fa-hourglass-start"></i> Phase 1: Beta Test Preview </h3>
+                    <p>Under Construction</p>
                 </div>
                 <div class="about-card">
-                    <h3><i class="fa-solid fa-code"></i> Phase 2: Core Development Sprint</h3>
-                    <p>Build, test, and iterate product features with mentors.</p>
+                    <h3><i class="fa-solid fa-code"></i> Phase 2: Bata Test Preview</h3>
+                    <p>Codename Crypton.</p>
                 </div>
             </div>
         `
@@ -295,7 +297,7 @@ const appData = {
             <div class="reg-container">
                 <h2>Ready to Build the Future?</h2>
                 <p>Secure your slot in Crypton via official team submission forms.</p>
-                <a href="https://forms.google.com" target="_blank" class="reg-btn">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEPWy9aZwKph0droxHLCEiJ0UWqSd2fl6wOdk7cTa_HTpjbA/viewform?usp=publish-editor" target="_blank" class="reg-btn">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Submission Form
                 </a>
             </div>
@@ -307,8 +309,8 @@ const appData = {
         content: `
             <div class="about-grid">
                 <div class="about-card">
-                    <h3><i class="fa-solid fa-users"></i> Core Engineering Team</h3>
-                    <p>Designed and built for high-performance student innovation.</p>
+                    <h3><i class="fa-solid fa-users"></i> Core Team</h3>
+                    <p>Built and run by Alliance Group. [Operating with MPL License 2.0]</p>
                 </div>
             </div>
         `
