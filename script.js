@@ -56,12 +56,12 @@ function animateCursor() {
 animateCursor();
 
 document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('button, .taskbar-app, .reg-btn, .menu-item, input, .domain-card, .qs-tile, .taskbar-tray-icon')) {
+    if (e.target.closest('button, .taskbar-app, .reg-btn, .menu-item, input, .domain-card, .upload-btn-label')) {
         document.body.classList.add('cursor-hover');
     }
 });
 document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('button, .taskbar-app, .reg-btn, .menu-item, input, .domain-card, .qs-tile, .taskbar-tray-icon')) {
+    if (e.target.closest('button, .taskbar-app, .reg-btn, .menu-item, input, .domain-card, .upload-btn-label')) {
         document.body.classList.remove('cursor-hover');
     }
 });
@@ -168,42 +168,16 @@ animateWallpaper();
 function toggleWallpaperMode() {
     wallpaperActive = !wallpaperActive;
     if(canvas) canvas.style.opacity = wallpaperActive ? '1' : '0';
-    const tile = document.getElementById('wallTile');
-    if (tile) tile.classList.toggle('active', wallpaperActive);
     triggerNotification("Wallpaper Mode", `Live background ${wallpaperActive ? 'activated' : 'deactivated'}.`);
-}
-
-function updateBrightness(val) {
-    document.getElementById('briVal').textContent = val + '%';
-    const dimmer = document.getElementById('displayDimmer');
-    if (dimmer) {
-        let opacityVal = (100 - val) / 100 * 0.85;
-        dimmer.style.opacity = opacityVal;
-    }
 }
 
 function updateSystemMetrics() {
     const now = new Date();
     document.getElementById('islandClock').textContent = now.toLocaleTimeString();
     document.getElementById('islandDate').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    document.getElementById('cpuUsage').textContent = (Math.floor(Math.random() * 6) + 2) + '%';
-    document.getElementById('ramUsage').textContent = (1.5 + Math.random() * 0.2).toFixed(1) + 'GB';
 }
 setInterval(updateSystemMetrics, 1000);
 updateSystemMetrics();
-
-function toggleQuickSettings() {
-    const qs = document.getElementById('quickSettingsPanel');
-    if (qs) qs.classList.toggle('open');
-}
-
-window.addEventListener('click', (e) => {
-    const qsPanel = document.getElementById('quickSettingsPanel');
-    const qsBtn = document.querySelector('.taskbar-tray-icon');
-    if (qsPanel && qsPanel.classList.contains('open') && !qsPanel.contains(e.target) && !qsBtn.contains(e.target)) {
-        qsPanel.classList.remove('open');
-    }
-});
 
 const contextMenu = document.getElementById('desktopContextMenu');
 window.addEventListener('contextmenu', (e) => {
@@ -280,12 +254,8 @@ The goal of Crypton is to prepare students for the future by giving them portfol
         content: `
             <div class="domains-grid">
                 <div class="about-card">
-                    <h3><i class="fa-solid fa-hourglass-start"></i> Phase 1: Beta Test Preview </h3>
+                    <h3><i class="fa-solid fa-hourglass-start"></i> Phase 1: Beta Test Preview</h3>
                     <p>Under Construction</p>
-                </div>
-                <div class="about-card">
-                    <h3><i class="fa-solid fa-code"></i> Phase 2: Bata Test Preview</h3>
-                    <p>Codename Crypton.</p>
                 </div>
             </div>
         `
@@ -300,6 +270,31 @@ The goal of Crypton is to prepare students for the future by giving them portfol
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEPWy9aZwKph0droxHLCEiJ0UWqSd2fl6wOdk7cTa_HTpjbA/viewform?usp=publish-editor" target="_blank" class="reg-btn">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Submission Form
                 </a>
+            </div>
+        `
+    },
+    brochure: {
+        title: "Event Brochure",
+        icon: "fa-book-open",
+        content: `
+            <div class="media-app-container">
+                <div class="pdf-viewer-wrapper" id="pdfViewerWrapper">
+                    <iframe src="Crypton.pdf" class="pdf-iframe" id="pdfFrame"></iframe>
+                </div>
+            </div>
+        `
+    },
+    trailer: {
+        title: "Event Trailer",
+        icon: "fa-film",
+        content: `
+            <div class="media-app-container">
+                <div class="video-player-wrapper">  
+                    <video controls autoplay class="trailer-video" id="trailerVideo">
+                        <source src="trailer.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             </div>
         `
     },
@@ -427,7 +422,7 @@ function bringToFront(win) {
 
 function updateTaskbarState(appId, state) {
     const taskbarApps = document.querySelectorAll('#taskbarAppsContainer .taskbar-app');
-    const indexMap = { about: 0, domains: 1, timeline: 2, registration: 3, credits: 4 };
+    const indexMap = { about: 0, domains: 1, timeline: 2, registration: 3, brochure: 4, trailer: 5, credits: 6 };
     const idx = indexMap[appId];
     if (idx !== undefined && taskbarApps[idx]) {
         taskbarApps[idx].classList.remove('active', 'minimized');
@@ -512,13 +507,27 @@ function toggleMaximize(win) {
     }
 }
 
-function triggerFullScreenMode() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-        triggerNotification("Display", "Entered Fullscreen Mode");
-    } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        triggerNotification("Display", "Exited Fullscreen Mode");
+function loadPDFBrochure(event) {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+        const fileURL = URL.createObjectURL(file);
+        const iframe = document.getElementById('pdfFrame');
+        if (iframe) iframe.src = fileURL;
+        triggerNotification("Brochure Loaded", file.name);
+    }
+}
+
+function loadMP4Trailer(event) {
+    const file = event.target.files[0];
+    if (file && file.type === 'video/mp4') {
+        const fileURL = URL.createObjectURL(file);
+        const video = document.getElementById('trailerVideo');
+        if (video) {
+            video.src = fileURL;
+            video.load();
+            video.play();
+        }
+        triggerNotification("Trailer Loaded", file.name);
     }
 }
 
@@ -541,21 +550,18 @@ function handleTerminalCommand(e, inputEl) {
   about      - Display system platform info
   domains    - Inspect active event domains
   matrix     - Toggle hacker matrix aesthetic mode
-  ping       - Check secure gateway response latency
   status     - Print detailed hardware diagnostics
   clear      - Clear terminal screen buffer
   reboot     - Restart Crypton OS kernel`;
         } else if (cmd === 'about') {
-            response = "Crypton OS v4.5: Engineered for next-gen student innovation[cite: 1].";
+            response = "Crypton OS v4.5: Engineered for next-gen student innovation.";
         } else if (cmd === 'domains') {
-            response = "1. Impact & Innovation[cite: 1]\n2. Game & Growth[cite: 1]\n3. Cyber Circuit";
+            response = "1. Impact & Innovation\n2. Game & Growth\n3. Cyber Circuit";
         } else if (cmd === 'matrix') {
             document.body.style.color = document.body.style.color === 'rgb(34, 197, 94)' ? '#f0f0f5' : '#22c55e';
             response = "Matrix aesthetic theme toggled successfully.";
-        } else if (cmd === 'ping') {
-            response = "PING crypton-os.internal (127.0.0.1): 56 data bytes\n64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.142 ms\n--- ping statistics ---\n1 packets transmitted, 1 received, 0% packet loss";
         } else if (cmd === 'status') {
-            response = "CPU Load: 3% | RAM Free: 14.4GB / 16GB | GPU Pipeline: Active | Security: Enforced";
+            response = "GPU Pipeline: Active | Security: Enforced";
         } else if (cmd === 'clear') {
             outputArea.textContent = "";
             inputEl.value = "";
